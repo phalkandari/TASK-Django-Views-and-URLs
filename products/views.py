@@ -6,7 +6,7 @@ from .models import Product
 
 # Create your views here.
 def get_home(request):
-    return HttpResponse("<h1> Welcome to this Drinks Website!!<h1/>")
+    return HttpResponse("<h1> Welcome to this Products Website!!<h1/>")
 
 
 def get_product(request, product_id):
