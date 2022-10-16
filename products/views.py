@@ -1,5 +1,6 @@
 from django.shortcuts import HttpResponse, render
 from django.http import HttpResponse
+from django.http import Http404
 
 
 from .models import Product
@@ -10,9 +11,11 @@ def get_home(request):
 
 
 def get_product(request, product_id):
-    product = Product.objects.get(id=product_id)
-    context = {"product": product}
-    return render(request, "product_detail.html", context)
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        raise Http404
+    return render(request, "product_detail.html", {"product": product})
 
 
 def get_products(request):
