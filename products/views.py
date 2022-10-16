@@ -11,10 +11,14 @@ def get_home(request):
 
 def get_product(request, product_id):
     product = Product.objects.get(id=product_id)
-    return HttpResponse(
-        f"""
-                        <p>{product.id}</p>
-                        <p>{product.name}</p>
-                        <p>{product.price}</p>
-                        """
-    )
+    context = {"product": product}
+    return render(request, "product_detail.html", context)
+
+
+def get_products(request):
+    products = Product.objects.all()
+    context = {"products": products}
+    return render(request, "product_list.html", context)
+
+
+# You create a loop if you want to filter the items inside the list
